@@ -27,7 +27,7 @@ class Verify extends Form {
   doSubmit = async () => {
     try {
       await auth.login(this.state.data.verifyCode);
-      this.props.history.push("/");
+      window.location = "/";
     } catch (ex) {
       toast.error(ex.message);
     }
@@ -35,7 +35,7 @@ class Verify extends Form {
 
   render() {
     return (
-      <div className="text-center">
+      <div className="text-center" style={{ marginTop: "30vh" }}>
         <h3>کد تایید ارسال شده به شماره {this.props.cellNo} را وارد کنید.</h3>
         <form className="form-signin" onSubmit={this.handleSubmit}>
           {this.renderInput("verifyCode", "کد تایید")}

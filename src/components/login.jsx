@@ -1,11 +1,11 @@
 import React from "react";
 import Joi from "joi-browser";
-import Form from "./common/form";
-
+import { toast } from "react-toastify";
 import auth from "../services/authservice";
 
+import Form from "./common/form";
+
 import "./login.css";
-import { toast } from "react-toastify";
 
 class Login extends Form {
   state = {
@@ -39,7 +39,7 @@ class Login extends Form {
 
   render() {
     return (
-      <div className="text-center">
+      <div className="text-center" style={{ marginTop: "30vh" }}>
         <h3>برای ورود یا ثبت ‌نام شماره تلفن همراه خود را وارد کنید</h3>
         <form className="form-signin" onSubmit={this.handleSubmit}>
           {this.renderInput("cellNo", "شماره موبایل")}

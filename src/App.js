@@ -10,32 +10,27 @@ import ProtectedRoute from "./components/common/protectedRoute";
 import Login from "./components/login";
 import Footer from "./components/footer";
 import Verify from "./components/verify";
+import NotLoginRoute from "./components/common/notLoginRoute";
+import Profile from "./components/profile";
+import Complete from "./components/complete";
+
+import "./App.css";
 
 class App extends Component {
-  state = {};
-  componentDidMount() {
-    const user = auth.getCurrentUser();
-    this.setState({ user });
-  }
-
   render() {
-    const { user } = this.state;
+    let user = auth.getCurrentUser();
+    console.log(user);
     return (
       <React.Fragment>
         <ToastContainer />
-        {user && <Navbar />}
-        <div className="container">
+        {user && user.ID && <Navbar />}
+        <div className="container mt-4">
           <Switch>
             <ProtectedRoute path="/logout" component={Logout} />
-            <Route path="/login" component={Login} />
-            <Route
-              path="/verify"
-              render={props => {
-                if (localStorage.getItem("Token"))
-                  return <Verify cellNo={user.cellNo} {...props} />;
-                else return <Redirect to="/login" />;
-              }}
-            />
+            <ProtectedRoute path="/profile" component={Profile} />
+            <ProtectedRoute path="/complete" component={Complete} />
+            <NotLoginRoute path="/login" component={Login} />
+            <NotLoginRoute path="/verify" component={Verify} />
             <Route path="/not-found" component={NotFound} />
             <ProtectedRoute exact path="/" component={Home} />
             <Redirect to="/not-found" />

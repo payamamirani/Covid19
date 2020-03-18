@@ -11,7 +11,7 @@ axios.interceptors.response.use(null, error => {
 });
 
 function setJwt(jwt) {
-  if (jwt) axios.defaults.headers.common["Token"] = jwt;
+  axios.defaults.headers.common["Token"] = jwt;
 }
 
 export default {

@@ -6,8 +6,11 @@ import App from "./App";
 import "bootstrap/dist/css/bootstrap.css";
 import "font-awesome/css/font-awesome.css";
 import "react-toastify/dist/ReactToastify.css";
-import "./App.css";
 import "./index.css";
+
+import "jquery/dist/jquery.js";
+import "popper.js/dist/popper.js";
+import "bootstrap/dist/js/bootstrap.js";
 
 ReactDOM.render(
   <BrowserRouter>
