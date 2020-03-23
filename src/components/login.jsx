@@ -2,10 +2,7 @@ import React from "react";
 import Joi from "joi-browser";
 import { toast } from "react-toastify";
 import auth from "../services/authservice";
-
 import Form from "./common/form";
-
-import "./login.css";
 
 class Login extends Form {
   state = {

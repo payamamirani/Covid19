@@ -13,6 +13,7 @@ import Verify from "./components/verify";
 import NotLoginRoute from "./components/common/notLoginRoute";
 import Profile from "./components/profile";
 import Complete from "./components/complete";
+import Request from "./components/request";
 
 import "./App.css";
 
@@ -29,6 +30,7 @@ class App extends Component {
             <ProtectedRoute path="/logout" component={Logout} />
             <ProtectedRoute path="/profile" component={Profile} />
             <ProtectedRoute path="/complete" component={Complete} />
+            <ProtectedRoute path="/request" component={Request} />
             <NotLoginRoute path="/login" component={Login} />
             <NotLoginRoute path="/verify" component={Verify} />
             <Route path="/not-found" component={NotFound} />

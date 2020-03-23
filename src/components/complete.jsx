@@ -20,14 +20,44 @@ class Complete extends Form {
   };
 
   schema = {
-    name: Joi.string().required(),
-    family: Joi.string().required(),
+    name: Joi.string()
+      .required()
+      .error(() => {
+        return {
+          message: "نام اجباریست"
+        };
+      })
+      .label("نام"),
+    family: Joi.string()
+      .required()
+      .error(() => {
+        return {
+          message: "نام خانوادگی اجباریست"
+        };
+      })
+      .label("نام خانوادگی"),
     email: Joi.string()
       .email()
-      .optional(),
-    phoneNumber: Joi.number().optional(),
-    address: Joi.string().optional(),
-    role: Joi.number().required()
+      .error(() => {
+        return { message: "پست الکترونیک نادرست است." };
+      })
+      .allow("")
+      .label("پست الکترونیک"),
+    phoneNumber: Joi.number()
+      .error(() => {
+        return { message: "شماره تلفن نادرست است." };
+      })
+      .allow("")
+      .label("شماره تلفن"),
+    address: Joi.string()
+      .allow("")
+      .label("آدرس"),
+    role: Joi.number()
+      .required()
+      .error(() => {
+        return { message: "شغل نادرست است." };
+      })
+      .label("شغل")
   };
 
   async componentDidMount() {
@@ -52,9 +82,9 @@ class Complete extends Form {
     const { data: user } = await getUserInfo();
     if (!user.success) toast.error(user.message);
 
-    localStorage.setItem("User", user.payload[0]);
+    localStorage.setItem("User", JSON.stringify(user.payload[0]));
 
-    this.props.history.replace("/logout");
+    this.props.history.replace("/");
   };
 
   render() {

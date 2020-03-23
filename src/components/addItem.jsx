@@ -1,6 +1,8 @@
 import React from "react";
-import Form from "./common/form";
+import { saveRequest } from "../services/requestService";
+import { toast } from "react-toastify";
 import Joi from "joi-browser";
+import Form from "./common/form";
 
 class AddItem extends Form {
   state = {
@@ -13,7 +15,19 @@ class AddItem extends Form {
 
   schema = {
     item: Joi.number().required(),
-    count: Joi.number().optional()
+    count: Joi.number().allow("")
+  };
+
+  doSubmit = async () => {
+    const { item, count } = this.state.data;
+    const { data: result } = await saveRequest({
+      RequestType: 2,
+      ItemID: item,
+      Count: count === "" ? 0 : count
+    });
+    if (!result.success) toast.error(result.message);
+    toast.success("ثبت درخواست با موفقیت انجام شد.");
+    this.setState({ data: { item: "", count: "" } });
   };
 
   render() {
@@ -25,7 +39,12 @@ class AddItem extends Form {
         <h1>{title}</h1>
         <form onSubmit={this.handleSubmit}>
           {this.renderSelect("item", "جنس / شغل", items)}
-          {item && item.HasCount && this.renderInput("count", "تعداد")}
+          {this.renderInput(
+            "count",
+            "تعداد",
+            "text",
+            !(item && !!item.HasCount)
+          )}
           {this.renderButton("ارسال درخواست")}
         </form>
       </div>

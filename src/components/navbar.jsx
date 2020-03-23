@@ -6,8 +6,11 @@ class Navbar extends Component {
   render() {
     const user = authservice.getCurrentUser();
     return (
-      <nav className="navbar navbar-expand-md bg-dark navbar-dark">
+      <nav className="navbar navbar-expand-md navbar-light bg-light">
         <div className="container">
+          <Link className="navbar-brand" to="/">
+            <img src={"logo192.png"} alt="Logo" style={{ width: 40 }} />
+          </Link>
           <Link className="navbar-brand" to="/">
             کوید 19
           </Link>
@@ -24,10 +27,17 @@ class Navbar extends Component {
           <div className="navbar-collapse collapse">
             <ul className="navbar-nav">
               <li className="nav-item">
-                <NavLink className="nav-link" to="/">
+                <NavLink className="nav-link" exact to="/">
                   صفحه اصلی
                 </NavLink>
               </li>
+              {user.IsSuperVisor && (
+                <li className="nav-item">
+                  <NavLink className="nav-link" to="/request">
+                    درخواست ها
+                  </NavLink>
+                </li>
+              )}
             </ul>
 
             <ul className="navbar-nav mr-auto">

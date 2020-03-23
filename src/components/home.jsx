@@ -45,7 +45,7 @@ class Home extends Component {
                 ""
               )}
               {p.Gid === "0E749937-B58C-4B7D-AB20-E833AF083651" ? (
-                <NeedItem items={items} />
+                <NeedItem items={items} title={p.Title} />
               ) : (
                 ""
               )}
