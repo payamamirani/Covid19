@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-import auth from "./services/authservice";
-import Navbar from "./components/navbar";
+import LoginTemplate from "./components/templates/loginTemplate";
 import NotFound from "./components/notFound";
 import Home from "./components/home";
 import Logout from "./components/logout";
@@ -19,25 +18,22 @@ import "./App.css";
 
 class App extends Component {
   render() {
-    let user = auth.getCurrentUser();
-    console.log(user);
     return (
       <React.Fragment>
         <ToastContainer />
-        {user && user.ID && <Navbar />}
-        <div className="container mt-4">
-          <Switch>
+        <Switch>
+          <NotLoginRoute path="/login" component={Login} />
+          <NotLoginRoute path="/verify" component={Verify} />
+          <ProtectedRoute path="/complete" component={Complete} />
+          <Route path="/not-found" component={NotFound} />
+          <LoginTemplate>
             <ProtectedRoute path="/logout" component={Logout} />
             <ProtectedRoute path="/profile" component={Profile} />
-            <ProtectedRoute path="/complete" component={Complete} />
             <ProtectedRoute path="/request" component={Request} />
-            <NotLoginRoute path="/login" component={Login} />
-            <NotLoginRoute path="/verify" component={Verify} />
-            <Route path="/not-found" component={NotFound} />
             <ProtectedRoute exact path="/" component={Home} />
-            <Redirect to="/not-found" />
-          </Switch>
-        </div>
+          </LoginTemplate>
+          <Redirect to="/not-found" />
+        </Switch>
         <Footer />
       </React.Fragment>
     );

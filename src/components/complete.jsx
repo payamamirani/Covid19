@@ -84,22 +84,24 @@ class Complete extends Form {
 
     localStorage.setItem("User", JSON.stringify(user.payload[0]));
 
-    this.props.history.replace("/");
+    window.location = "/";
   };
 
   render() {
     return (
-      <div className="text-center">
-        <h1>تکیمل اطلاعات کاربری</h1>
-        <form onSubmit={this.handleSubmit}>
-          {this.renderInput("name", "نام")}
-          {this.renderInput("family", "نام خانوادگی")}
-          {this.renderInput("email", "پست الکترونیک")}
-          {this.renderInput("phoneNumber", "تلفن ثابت")}
-          {this.renderInput("address", "آدرس")}
-          {this.renderSelect("role", "شغل", this.state.roles)}
-          {this.renderButton("ذخیره")}
-        </form>
+      <div className="container text-center mt-3 rtl">
+        <div className="m-auto" style={{ maxWidth: 400 }}>
+          <h1>تکیمل اطلاعات کاربری</h1>
+          <form onSubmit={this.handleSubmit}>
+            {this.renderInput("name", "نام")}
+            {this.renderInput("family", "نام خانوادگی")}
+            {this.renderInput("email", "پست الکترونیک")}
+            {this.renderInput("phoneNumber", "تلفن ثابت")}
+            {this.renderInput("address", "آدرس")}
+            {this.renderSelect("role", "شغل", this.state.roles)}
+            {this.renderButton("ذخیره")}
+          </form>
+        </div>
       </div>
     );
   }

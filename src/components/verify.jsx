@@ -34,9 +34,10 @@ class Verify extends Form {
   };
 
   render() {
+    const user = auth.getCurrentUser();
     return (
       <div className="text-center" style={{ marginTop: "30vh" }}>
-        <h3>کد تایید ارسال شده به شماره {this.props.cellNo} را وارد کنید.</h3>
+        <h3>کد تایید ارسال شده به شماره {user.CellNumber} را وارد کنید.</h3>
         <form className="form-signin" onSubmit={this.handleSubmit}>
           {this.renderInput("verifyCode", "کد تایید")}
           {this.renderButton("ورود")}

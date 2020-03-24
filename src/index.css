@@ -12,7 +12,7 @@
 html {
   position: relative;
   min-height: 100%;
-  direction: rtl;
+  /* direction: rtl; */
 }
 
 body {
@@ -22,13 +22,13 @@ body {
   background-color: #f5f5f5 !important;
 }
 
-.ltr {
+/* .ltr {
   direction: ltr;
 }
 
 .rtl {
   direction: rtl;
-}
+} */
 
 .body-content {
   padding-left: 15px;
@@ -44,8 +44,8 @@ body {
 }
 
 .Toastify__toast-body {
-  direction: rtl;
-  text-align: right;
+  /* direction: rtl;
+  text-align: right; */
 }
 
 .footer {
@@ -78,16 +78,28 @@ body {
 
 .form-signin input[type="number"],
 .form-signin input[type="text"] {
-  direction: ltr;
+  /* direction: ltr; */
   margin-bottom: 10px;
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
 }
 
-ul.pagination {
+/* ul.pagination {
   direction: ltr;
-}
+} */
 
 .pointer {
   cursor: pointer;
+}
+
+/*************** SIDEBAR ***************/
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 100;
+  padding: 80px 0 0;
+  box-shadow: inset 1px 0 0 rgba(0, 0, 0, 0.1);
 }

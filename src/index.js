@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
 import * as serviceWorker from "./serviceWorker";
 import App from "./App";
-import "bootstrap/dist/css/bootstrap.css";
+import "bootstrap-v4-rtl/dist/css/bootstrap-rtl.css";
 import "font-awesome/css/font-awesome.css";
 import "react-toastify/dist/ReactToastify.css";
 import "./index.css";

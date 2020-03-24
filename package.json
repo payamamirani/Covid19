@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^7.2.1",
     "axios": "^0.19.2",
     "bootstrap": "^4.4.1",
+    "bootstrap-v4-rtl": "^4.4.1-1",
     "font-awesome": "^4.7.0",
     "jalaali-js": "^1.1.0",
     "jalali-react-datepicker": "0.0.1-alpha-01",

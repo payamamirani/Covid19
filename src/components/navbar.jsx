@@ -5,11 +5,13 @@ import authservice from "../services/authservice";
 class Navbar extends Component {
   render() {
     const user = authservice.getCurrentUser();
+    if (!user) return null;
+
     return (
-      <nav className="navbar navbar-expand-md navbar-light bg-light">
-        <div className="container">
-          <Link className="navbar-brand" to="/">
-            <img src={"logo192.png"} alt="Logo" style={{ width: 40 }} />
+      <nav className="navbar navbar-expand-md navbar-dark bg-dark rtl">
+        <div className="container-fluid">
+          <Link className="navbar-brand bg-light" to="/">
+            <img src={"logo192.png"} alt="Logo" style={{ width: 29 }} />
           </Link>
           <Link className="navbar-brand" to="/">
             کوید 19
@@ -25,22 +27,7 @@ class Navbar extends Component {
           </button>
 
           <div className="navbar-collapse collapse">
-            <ul className="navbar-nav">
-              <li className="nav-item">
-                <NavLink className="nav-link" exact to="/">
-                  صفحه اصلی
-                </NavLink>
-              </li>
-              {user.IsSuperVisor && (
-                <li className="nav-item">
-                  <NavLink className="nav-link" to="/request">
-                    درخواست ها
-                  </NavLink>
-                </li>
-              )}
-            </ul>
-
-            <ul className="navbar-nav mr-auto">
+            <ul className="navbar-nav ml-auto">
               <li className="nav-item">
                 <NavLink className="nav-link" to="/profile">
                   {user.Name ? `${user.Name} ${user.Family}` : user.CellNumber}

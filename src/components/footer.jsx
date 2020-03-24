@@ -2,7 +2,7 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <footer className="footer text-center">
+    <footer className="footer text-center rtl">
       <span className="text-muted">
         &copy;
         {`${new Date().getFullYear()} - ${process.env.REACT_APP_NAME} نسخه ${
