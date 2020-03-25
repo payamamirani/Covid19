@@ -8,7 +8,13 @@ class BaseRoute extends Component {
     return Comp ? <Comp {...props} /> : render(props);
   };
 
-  getComponentLayout = ({ component, render, layout: Layout, props }) => {
+  getComponentLayout = ({
+    component,
+    render,
+    layout: Layout,
+    title,
+    props
+  }) => {
     const privileges = authservice.getCurrentUserPrivileges();
     const route = Routes.find(r => r.path === props.match.path);
     if (route && route.Gid) {
@@ -17,7 +23,11 @@ class BaseRoute extends Component {
     }
 
     if (Layout) {
-      return <Layout>{this.getComponent({ component, render, props })}</Layout>;
+      return (
+        <Layout title={title}>
+          {this.getComponent({ component, render, props })}
+        </Layout>
+      );
     }
 
     return this.getComponent({ component, props });

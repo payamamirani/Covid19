@@ -43,7 +43,6 @@ class AddItem extends Form {
 
     return (
       <React.Fragment>
-        <h1>ثبت درخواست کمک رسانی</h1>
         <form className="m-auto max-width-400" onSubmit={this.handleSubmit}>
           {this.renderSelect("item", "جنس / شغل", items)}
           {this.renderInput(

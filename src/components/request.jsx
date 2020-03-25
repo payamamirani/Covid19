@@ -98,8 +98,6 @@ class Request extends Component {
 
     return (
       <React.Fragment>
-        <h1>گزارش درخواستها</h1>
-        <br />
         <RangeDatePicker onClickSubmitButton={this.handleFilter} />
         <br />
         <Table

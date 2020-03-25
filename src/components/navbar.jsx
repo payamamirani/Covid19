@@ -8,7 +8,7 @@ class Navbar extends Component {
     if (!user) return null;
 
     return (
-      <nav className="navbar navbar-expand-md navbar-dark bg-dark fixed-top flex-md-nowrap p-0 shadow rtl">
+      <nav className="navbar navbar-expand-md navbar-dark bg-dark flex-md-nowrap p-0 shadow rtl">
         <div className="container-fluid">
           <Link className="navbar-brand bg-light" to="/">
             <img src={"logo192.png"} alt="Logo" style={{ width: 29 }} />
@@ -21,12 +21,12 @@ class Navbar extends Component {
             type="button"
             className="navbar-toggler collapsed"
             data-toggle="collapse"
-            data-target=".navbar-collapse"
+            data-target="#TopNavbar"
           >
             <span className="navbar-toggler-icon"></span>
           </button>
 
-          <div className="navbar-collapse collapse">
+          <div className="navbar-collapse collapse" id="TopNavbar">
             <ul className="navbar-nav ml-auto">
               <li className="nav-item">
                 <NavLink className="nav-link" to="/profile">

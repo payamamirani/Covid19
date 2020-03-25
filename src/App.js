@@ -25,13 +25,13 @@ class App extends Component {
           <ProtectedRoute path="/complete" component={Complete} />
           <Route path="/not-found" component={NotFound} />
           {Routes.map((r, i) => {
-            debugger;
             return (
               <ProtectedRoute
                 key={i}
                 path={r.path}
                 layout={LoginTemplate}
                 component={r.component}
+                title={r.title}
               />
             );
           })}

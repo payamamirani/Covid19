@@ -1,8 +1,7 @@
 import React, { Component } from "react";
+import Drawer from "../drawer";
 import Navbar from "../navbar";
-import { NavLink } from "react-router-dom";
 import authservice from "../../services/authservice";
-import Routes from "../common/routes";
 
 class LoginTemplate extends Component {
   state = {
@@ -13,34 +12,20 @@ class LoginTemplate extends Component {
     this.setState({ privileges: authservice.getCurrentUserPrivileges() });
   }
 
-  getUrl = gid => {
-    let url = "#";
-    const route = Routes.find(r => r.Gid === gid);
-    if (route) url = route.path;
-    return url;
-  };
-
   render() {
     const { privileges } = this.state;
     return (
       <React.Fragment>
-        <Navbar />
+        <div className="fixed-top">
+          <Navbar />
+          {privileges.length > 0 && window.innerWidth <= 760 && (
+            <Drawer privileges={privileges} />
+          )}
+        </div>
         <div className="container-fluid rtl mt-6">
           <div className="row">
-            {privileges.length > 0 && (
-              <div className="col-md-3 col-lg-2 d-none d-md-block bg-light sidebar">
-                <div className="sidebar-sticky">
-                  <ul className="nav flex-column">
-                    {privileges.map(p => (
-                      <li key={p.ID} className="nav-item">
-                        <NavLink className="nav-link" to={this.getUrl(p.Gid)}>
-                          {p.Title}
-                        </NavLink>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
+            {privileges.length > 0 && window.innerWidth > 760 && (
+              <Drawer privileges={privileges} />
             )}
             <div
               style={{ minHeight: "80vh" }}
@@ -49,6 +34,7 @@ class LoginTemplate extends Component {
                 (privileges.length > 0 ? "col-md-9 col-lg-10" : "col-md-12")
               }
             >
+              <h3 className="text-center">{this.props.title}</h3>
               {this.props.children}
             </div>
           </div>

@@ -6,7 +6,7 @@ import BaseRoute from "./baseRoute";
 class ProtectedRoute extends BaseRoute {
   render() {
     const user = auth.getCurrentUser();
-    const { component, render, layout, ...rest } = this.props;
+    const { component, render, layout, title, ...rest } = this.props;
     return (
       <Route
         {...rest}
@@ -22,6 +22,7 @@ class ProtectedRoute extends BaseRoute {
               component,
               render,
               layout,
+              title,
               props
             });
           } else {
