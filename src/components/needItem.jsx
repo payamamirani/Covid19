@@ -16,8 +16,16 @@ class NeedItem extends Form {
   };
 
   schema = {
-    item: Joi.number().required(),
-    count: Joi.number().allow("")
+    item: Joi.number()
+      .required()
+      .error(() => {
+        return { message: "نوع نادرست است." };
+      }),
+    count: Joi.number()
+      .allow("")
+      .error(() => {
+        return { message: "تعداد نادرست است." };
+      })
   };
 
   async componentDidMount() {
@@ -32,7 +40,7 @@ class NeedItem extends Form {
       ItemID: item,
       Count: count === "" ? 0 : count
     });
-    if (!result.success) toast.error(result.message);
+    if (!result.success) return toast.error(result.message);
     toast.success("ثبت درخواست با موفقیت انجام شد.");
     this.setState({ data: { item: "", count: "" } });
   };

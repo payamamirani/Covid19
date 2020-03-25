@@ -22,9 +22,8 @@ class Request extends Component {
   columns = [
     { path: "ID", label: "شناسه" },
     {
-      path: "ItemID",
-      label: "جنس / شغل",
-      content: item => this.getItem(item.ItemID)
+      path: "ItemTitle",
+      label: "جنس / شغل"
     },
     { path: "Count", label: "تعداد" },
     {
@@ -39,7 +38,9 @@ class Request extends Component {
         <div className="ltr">{toJalaliDateTime(item.CreatedOn)}</div>
       )
     },
-    { path: "UserID", label: "کاربر" }
+    { path: "CellNumber", label: "کاربر" },
+    { path: "Name", label: "نام" },
+    { path: "Family", label: "نام خانوادگی" }
   ];
 
   async componentDidMount() {
