@@ -1,4 +1,5 @@
 import React from "react";
+import { getItems } from "../services/itemService";
 import { saveRequest } from "../services/requestService";
 import { toast } from "react-toastify";
 import Joi from "joi-browser";
@@ -6,12 +7,18 @@ import Form from "./common/form";
 
 class AddItem extends Form {
   state = {
+    items: [],
     data: {
       item: "",
       count: ""
     },
     errors: {}
   };
+
+  async componentDidMount() {
+    const { data: items } = await getItems();
+    if (items.success) this.setState({ items: items.payload });
+  }
 
   schema = {
     item: Joi.number().required(),
@@ -31,13 +38,13 @@ class AddItem extends Form {
   };
 
   render() {
-    const { items, title } = this.props;
+    const { items } = this.state;
     const item = items.find(i => i.ID === parseInt(this.state.data.item));
 
     return (
-      <div className="rtl text-right mt-2">
-        <h1>{title}</h1>
-        <form onSubmit={this.handleSubmit}>
+      <React.Fragment>
+        <h1>ثبت درخواست کمک رسانی</h1>
+        <form className="m-auto max-width-400" onSubmit={this.handleSubmit}>
           {this.renderSelect("item", "جنس / شغل", items)}
           {this.renderInput(
             "count",
@@ -47,7 +54,7 @@ class AddItem extends Form {
           )}
           {this.renderButton("ارسال درخواست")}
         </form>
-      </div>
+      </React.Fragment>
     );
   }
 }

@@ -5,7 +5,7 @@ class Profile extends Component {
   render() {
     const user = authservice.getCurrentUser();
     return (
-      <div className="text-center">
+      <div className="text-center table-responsive">
         <table className="table">
           <thead>
             <tr>

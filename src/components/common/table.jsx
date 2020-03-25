@@ -5,10 +5,16 @@ import TableBody from "./tableBody";
 
 const Table = ({ data, columns, sortColumn, onSort, keyProperty }) => {
   return (
-    <table className="table table-striped">
-      <TableHeader columns={columns} sortColumn={sortColumn} onSort={onSort} />
-      <TableBody data={data} columns={columns} keyProperty={keyProperty} />
-    </table>
+    <div className="table-responsive">
+      <table className="table table-striped">
+        <TableHeader
+          columns={columns}
+          sortColumn={sortColumn}
+          onSort={onSort}
+        />
+        <TableBody data={data} columns={columns} keyProperty={keyProperty} />
+      </table>
+    </div>
   );
 };
 

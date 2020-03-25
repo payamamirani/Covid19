@@ -11,7 +11,7 @@ import { toast } from "react-toastify";
 
 class Request extends Component {
   state = {
-    pageSize: 5,
+    pageSize: 10,
     currentPage: 1,
     requests: [],
     items: [],
@@ -98,9 +98,9 @@ class Request extends Component {
 
     return (
       <React.Fragment>
-        <div className="text-right">
-          <RangeDatePicker onClickSubmitButton={this.handleFilter} />
-        </div>
+        <h1>گزارش درخواستها</h1>
+        <br />
+        <RangeDatePicker onClickSubmitButton={this.handleFilter} />
         <br />
         <Table
           data={requests}

@@ -1,5 +1,6 @@
 import http from "./httpService";
 import JwtDecode from "jwt-decode";
+import { getUserInfo } from "./userInfoService";
 
 const endPoint = "/session";
 const tokenKey = "Token";
@@ -16,6 +17,10 @@ export async function login(verificationCode) {
 
   localStorage.setItem(tokenKey, data.payload[0]);
   http.setJwt(getJwt());
+
+  const { data: User } = await getUserInfo();
+  if (User.success)
+    localStorage.setItem("User", JSON.stringify(User.payload[0]));
 }
 
 export function logout() {
@@ -32,9 +37,17 @@ export function getCurrentUser() {
   try {
     const u = localStorage.getItem("User");
     if (u) return JSON.parse(u).User;
-    const jwt = localStorage.getItem(tokenKey);
-    let user = JwtDecode(jwt);
-    if (user && user.User) user = JSON.parse(user.User);
-    return user;
+    const jwt = localStorage.getItem("Token");
+    const user = JwtDecode(jwt);
+    if (user) return user;
+    return null;
+  } catch (ex) {}
+}
+
+export function getCurrentUserPrivileges() {
+  try {
+    const u = localStorage.getItem("User");
+    if (u) return JSON.parse(u).Privileges;
+    return null;
   } catch (ex) {}
 }

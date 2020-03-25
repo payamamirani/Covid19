@@ -1,45 +1,56 @@
 import React, { Component } from "react";
-import { getPrivileges } from "../../services/privilegeService";
 import Navbar from "../navbar";
-import { toast } from "react-toastify";
+import { NavLink } from "react-router-dom";
+import authservice from "../../services/authservice";
+import Routes from "../common/routes";
 
 class LoginTemplate extends Component {
   state = {
     privileges: []
   };
 
-  async componentDidMount() {
-    const { data: privilage } = await getPrivileges();
-    if (privilage.success) this.setState({ privileges: privilage.payload });
+  componentDidMount() {
+    this.setState({ privileges: authservice.getCurrentUserPrivileges() });
   }
+
+  getUrl = gid => {
+    let url = "#";
+    const route = Routes.find(r => r.Gid === gid);
+    if (route) url = route.path;
+    return url;
+  };
 
   render() {
     const { privileges } = this.state;
     return (
       <React.Fragment>
         <Navbar />
-        <div className="container-fluid rtl mt-4">
+        <div className="container-fluid rtl mt-6">
           <div className="row">
             {privileges.length > 0 && (
-              <div className="col-2 sidebar">
+              <div className="col-md-3 col-lg-2 d-none d-md-block bg-light sidebar">
                 <div className="sidebar-sticky">
                   <ul className="nav flex-column">
                     {privileges.map(p => (
                       <li key={p.ID} className="nav-item">
-                        <a
-                          className="nav-link"
-                          data-toggle="tab"
-                          href={`#Tab${p.Gid}`}
-                        >
+                        <NavLink className="nav-link" to={this.getUrl(p.Gid)}>
                           {p.Title}
-                        </a>
+                        </NavLink>
                       </li>
                     ))}
                   </ul>
                 </div>
               </div>
             )}
-            <div className="col">{this.props.children}</div>
+            <div
+              style={{ minHeight: "80vh" }}
+              className={
+                "ml-sm-auto px-4 " +
+                (privileges.length > 0 ? "col-md-9 col-lg-10" : "col-md-12")
+              }
+            >
+              {this.props.children}
+            </div>
           </div>
         </div>
       </React.Fragment>

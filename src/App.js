@@ -4,15 +4,13 @@ import { ToastContainer } from "react-toastify";
 import LoginTemplate from "./components/templates/loginTemplate";
 import NotFound from "./components/notFound";
 import Home from "./components/home";
-import Logout from "./components/logout";
 import ProtectedRoute from "./components/common/protectedRoute";
 import Login from "./components/login";
 import Footer from "./components/footer";
 import Verify from "./components/verify";
 import NotLoginRoute from "./components/common/notLoginRoute";
-import Profile from "./components/profile";
 import Complete from "./components/complete";
-import Request from "./components/request";
+import Routes from "./components/common/routes";
 
 import "./App.css";
 
@@ -26,12 +24,23 @@ class App extends Component {
           <NotLoginRoute path="/verify" component={Verify} />
           <ProtectedRoute path="/complete" component={Complete} />
           <Route path="/not-found" component={NotFound} />
-          <LoginTemplate>
-            <ProtectedRoute path="/logout" component={Logout} />
-            <ProtectedRoute path="/profile" component={Profile} />
-            <ProtectedRoute path="/request" component={Request} />
-            <ProtectedRoute exact path="/" component={Home} />
-          </LoginTemplate>
+          {Routes.map((r, i) => {
+            debugger;
+            return (
+              <ProtectedRoute
+                key={i}
+                path={r.path}
+                layout={LoginTemplate}
+                component={r.component}
+              />
+            );
+          })}
+          <ProtectedRoute
+            exact
+            path="/"
+            layout={LoginTemplate}
+            component={Home}
+          />
           <Redirect to="/not-found" />
         </Switch>
         <Footer />

@@ -8,7 +8,7 @@ class Navbar extends Component {
     if (!user) return null;
 
     return (
-      <nav className="navbar navbar-expand-md navbar-dark bg-dark rtl">
+      <nav className="navbar navbar-expand-md navbar-dark bg-dark fixed-top flex-md-nowrap p-0 shadow rtl">
         <div className="container-fluid">
           <Link className="navbar-brand bg-light" to="/">
             <img src={"logo192.png"} alt="Logo" style={{ width: 29 }} />
