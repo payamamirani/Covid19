@@ -2,13 +2,22 @@ import React, { Component } from "react";
 import Joi from "joi-browser";
 import Input from "./input";
 import Select from "./select";
+import TextArea from "./textArea";
+import DateTimePicker from "./dateTimePicker";
 
 class Form extends Component {
   state = { data: {}, errors: {} };
 
   validate = () => {
+    const { schema, state } = this;
+    const { data } = state;
+    let validateData = {};
+
     const option = { abortEarly: false };
-    const { error } = Joi.validate(this.state.data, this.schema, option);
+    for (let key in schema)
+      if (data[key] !== undefined) validateData[key] = data[key];
+
+    const { error } = Joi.validate(validateData, schema, option);
     if (!error) return null;
 
     const errors = {};
@@ -74,6 +83,20 @@ class Form extends Component {
     );
   }
 
+  renderTextArea(name, label) {
+    const { data, errors } = this.state;
+
+    return (
+      <TextArea
+        name={name}
+        label={label}
+        onChange={this.handleChange}
+        error={errors[name]}
+        value={data[name]}
+      />
+    );
+  }
+
   renderSelect(name, label, options) {
     const { data, errors } = this.state;
 
@@ -85,6 +108,20 @@ class Form extends Component {
         options={options}
         onChange={this.handleChange}
         error={errors[name]}
+      />
+    );
+  }
+
+  renderDateTime(name, label) {
+    const { data, errors } = this.state;
+    return (
+      <DateTimePicker
+        name={name}
+        value={data[name]}
+        label={label}
+        isGregorian={false}
+        error={errors[name]}
+        onChange={this.handleChange}
       />
     );
   }

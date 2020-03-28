@@ -1,4 +1,5 @@
 import jalaali from "jalaali-js";
+import moment from "moment-jalaali";
 
 export function toJalaliDateTime(datetime) {
   const split = datetime.split("T");
@@ -15,4 +16,12 @@ export function toJalaliDateTime(datetime) {
     .toString()
     .padStart(2, "0")}/${jd.toString().padStart(2, "0")} 
   ${timeObj[0]}:${timeObj[1]}:${timeObj[2]}`;
+}
+
+export function momentJalali() {
+  return toMomentJalaliDateTime(moment().format("YYYY-MM-DDTHH:mm:ss"));
+}
+
+export function toMomentJalaliDateTime(datetime) {
+  return moment(toJalaliDateTime(datetime), "jYYYY/jMM/jDD HH:mm");
 }

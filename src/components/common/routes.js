@@ -3,6 +3,8 @@ import Profile from "../profile";
 import Request from "../request";
 import AddItem from "../addItem";
 import NeedItem from "../needItem";
+import HumanService from "../humanService";
+import HumanServiceReport from "../humanServiceReport";
 
 export default [
   { path: "/logout", component: Logout },
@@ -24,5 +26,17 @@ export default [
     Gid: "0E749937-B58C-4B7D-AB20-E833AF083651",
     component: NeedItem,
     title: "ثبت درخواست کمک گرفتن"
+  },
+  {
+    path: "/humanService/:id?",
+    Gid: "AFB78863-303F-4E73-9E32-529845D97BF7",
+    component: HumanService,
+    title: "کنترل منابع انسانی"
+  },
+  {
+    path: "/humanServiceReport",
+    Gid: "161089F6-F630-4641-BA02-0CB39B006981",
+    component: HumanServiceReport,
+    title: "گزارش منابع انسانی"
   }
 ];

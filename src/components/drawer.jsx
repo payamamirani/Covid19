@@ -6,7 +6,10 @@ class Drawer extends Component {
   getUrl = gid => {
     let url = "/test";
     const route = Routes.find(r => r.Gid === gid);
-    if (route) url = route.path;
+    if (route) {
+      const index = route.path.indexOf(":");
+      url = index === -1 ? route.path : route.path.substr(0, index - 1);
+    }
     return url;
   };
 
